@@ -14,7 +14,7 @@ app.use(express.json());
 app.use("/api", require("./route.js"));
 
 app.get("/", (req, res) => {
-  res.send("Welcome to the Blinkit app!");
+  res.send("Welcome to the digital Calculator!");
 });
 
 app.listen(port, () => {
