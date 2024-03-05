@@ -9,6 +9,8 @@ const Signup = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -17,6 +19,8 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     const { name, email, password } = formData;
 
     const response = await fetch(
@@ -43,6 +47,7 @@ const Signup = () => {
         position: "bottom-right",
       });
     }
+    setLoading(false);
   };
 
   return (
@@ -122,7 +127,7 @@ const Signup = () => {
             </div>
             <div>
               <button type="submit" className="btn btn-dark my-2">
-                Sign up
+                {loading ? "Loading..." : "Sign Up"}
               </button>
             </div>
           </form>

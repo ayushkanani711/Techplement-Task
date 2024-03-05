@@ -5,6 +5,7 @@ import backgroundImage from "../../public/bgImage.jpg";
 
 const login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const onChange = (e) => {
@@ -13,6 +14,7 @@ const login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const response = await fetch(
       `https://techplement-server.vercel.app/api/login`,
       {
@@ -34,6 +36,7 @@ const login = () => {
     } else {
       toast.error("Login Denide", { position: "bottom-right" });
     }
+    setLoading(false);
     console.log("Login successfully");
   };
   return (
@@ -95,7 +98,7 @@ const login = () => {
           </div>
           <div>
             <button type="submit" className="btn btn-dark my-2">
-              Login
+              {loading ? "Loading..." : "Login"}
             </button>
           </div>
         </form>

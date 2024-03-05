@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [calc, setCalc] = useState("");
   const [user, setUser] = useState(null);
   const [operation, setOperation] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchName = async () => {

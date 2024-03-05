@@ -3,41 +3,8 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const Navbar = ({ setUser }) => {
-  const [isLoggedin, setIsLoggedin] = useState(false);
+const Navbar = () => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchName = async () => {
-      try {
-        const response = await fetch(
-          `https://techplement-server.vercel.app/api/getuser`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "auth-token": localStorage.getItem("token"),
-            },
-          }
-        );
-        if (response.status === 200) {
-          const json = await response.json();
-          if (!json) {
-            toast.error("Please login to continue", {
-              position: "bottom-right",
-            });
-            navigate("/login");
-          } else {
-            setUser(json);
-            setIsLoggedin(true);
-          }
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchName();
-  }, []);
 
   const handleLogin = () => {
     navigate("/login");
@@ -46,7 +13,6 @@ const Navbar = ({ setUser }) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedin(false);
-    setUser("");
     toast.success("Logout successfully", { position: "bottom-right" });
     navigate("/login");
   };
@@ -81,7 +47,7 @@ const Navbar = ({ setUser }) => {
         </Link>
       </div>
 
-      {isLoggedin ? (
+      {localStorage.getItem("token") ? (
         <button
           onClick={handleLogout}
           style={{

@@ -10,8 +10,6 @@ import History from "./pages/History";
 import About from "./pages/About";
 
 function App() {
-  const [user, setUser] = useState(null);
-
   useEffect(() => {
     const fetchName = async () => {
       try {
@@ -25,13 +23,16 @@ function App() {
             },
           }
         );
-        const json = await response.json();
-        if (!json) {
-          toast.error("Please login to continue", { position: "bottom-right" });
-          navigate("/login");
+        if (response.status === 200) {
+          const json = await response.json();
+          if (!json) {
+            toast.error("Please login to continue", {
+              position: "bottom-right",
+            });
+            navigate("/login");
+          } else {
+          }
         }
-        setUser(json);
-        setIsLoggedin(true);
       } catch (error) {
         console.log(error);
       }
@@ -41,7 +42,7 @@ function App() {
 
   return (
     <Router>
-      <Navbar user={user} setUser={setUser} />
+      <Navbar />
       <Routes>
         <Route exact path="/home" element={<Home />} />
         <Route exact path="/login" element={<Login />} />
