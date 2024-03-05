@@ -12,7 +12,6 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    setIsLoggedin(false);
     toast.success("Logout successfully", { position: "bottom-right" });
     navigate("/login");
   };
