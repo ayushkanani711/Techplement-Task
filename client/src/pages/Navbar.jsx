@@ -10,13 +10,16 @@ const Navbar = ({ setUser }) => {
   useEffect(() => {
     const fetchName = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/getuser`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("token"),
-          },
-        });
+        const response = await fetch(
+          `https://techplement-server.vercel.app/api/getuser`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "auth-token": localStorage.getItem("token"),
+            },
+          }
+        );
         if (response.status === 200) {
           const json = await response.json();
           if (!json) {

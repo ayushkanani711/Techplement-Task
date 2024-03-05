@@ -19,26 +19,29 @@ const Signup = () => {
     e.preventDefault();
     const { name, email, password } = formData;
 
-    const response = await fetch(`http://localhost:8000/api/signup`, {
-        method: 'POST',
+    const response = await fetch(
+      `https://techplement-server.vercel.app/api/signup`,
+      {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ name, email, password }),
       }
     );
     const json = await response.json();
     if (json.success) {
-      localStorage.setItem('token', json.authtoken);
-      navigate('/home');
-      toast.success("Account created successfully", {position: "bottom-right"});
-    } 
-    else if(json.errors && json.errors[0].msg === "Enter valid Email"){
-      toast.error("Enter valid Email", {position: "bottom-right"});
-    }
-    else {
-      toast.error("Please try to login with a new email", {position: "bottom-right"});
-
+      localStorage.setItem("token", json.authtoken);
+      navigate("/home");
+      toast.success("Account created successfully", {
+        position: "bottom-right",
+      });
+    } else if (json.errors && json.errors[0].msg === "Enter valid Email") {
+      toast.error("Enter valid Email", { position: "bottom-right" });
+    } else {
+      toast.error("Please try to login with a new email", {
+        position: "bottom-right",
+      });
     }
   };
 

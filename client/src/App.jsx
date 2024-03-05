@@ -15,13 +15,16 @@ function App() {
   useEffect(() => {
     const fetchName = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/getuser`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("token"),
-          },
-        });
+        const response = await fetch(
+          `https://techplement-server.vercel.app/api/getuser`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "auth-token": localStorage.getItem("token"),
+            },
+          }
+        );
         const json = await response.json();
         if (!json) {
           toast.error("Please login to continue", { position: "bottom-right" });

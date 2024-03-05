@@ -6,13 +6,16 @@ const History = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/getHistory", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": localStorage.getItem("token"),
-          },
-        });
+        const response = await fetch(
+          "https://techplement-server.vercel.app/api/getHistory",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "auth-token": localStorage.getItem("token"),
+            },
+          }
+        );
         const data = await response.json();
         setHistory(data.history);
       } catch (error) {
